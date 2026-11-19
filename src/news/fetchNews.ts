@@ -1,13 +1,7 @@
 import Parser from "rss-parser";
+import type { NewsData, NewsItem } from "../types/news.js";
 
 const parser = new Parser();
-
-export type NewsItem = {
-    title: string;
-    link: string;
-    publishedAt: string;
-    summary: string;
-};
 
 const RSS_URLS = {
     technology: "https://news.yahoo.co.jp/rss/topics/it.xml",
@@ -27,7 +21,7 @@ export async function fetchRss(url: string): Promise<NewsItem[]> {
         }));
 }
 
-export async function fetchNews() {
+export async function fetchNews(): Promise<NewsData> {
     const [technology, economy, domestic]: [NewsItem[], NewsItem[], NewsItem[]] = await Promise.all(
         [fetchRss(RSS_URLS.technology), fetchRss(RSS_URLS.economy), fetchRss(RSS_URLS.domestic)],
     );

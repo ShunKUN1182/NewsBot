@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 import { GoogleGenAI } from "@google/genai";
-import type { NewsItem } from "../news/fetchNews.js";
+import type { NewsData, SelectedNewsSet } from "../types/news.js";
 
 const apiKey = process.env.GEMINI_API_KEY;
 
@@ -12,25 +12,6 @@ if (!apiKey) {
 const ai = new GoogleGenAI({
     apiKey: apiKey,
 });
-
-type NewsData = {
-    technology: NewsItem[];
-    economy: NewsItem[];
-    domestic: NewsItem[];
-};
-
-type SelectedNews = {
-    title: string;
-    link: string;
-    publishedAt: string;
-    reason: string;
-};
-
-type SelectedNewsSet = {
-    technology: SelectedNews[];
-    economy: SelectedNews[];
-    domestic: SelectedNews[];
-};
 
 export async function selectNews(newsObject: NewsData) {
     const inputNews = {
