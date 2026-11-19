@@ -3,13 +3,19 @@ import { selectNews } from "./ai/selectNews.js";
 import { sendEmail } from "./email/sendEmail.js";
 
 async function main() {
-    try {
-        const news = await fetchNews();
-        const selected = await selectNews(news);
-        await sendEmail(selected);
-    } catch (error) {
-        console.error("取得失敗", error);
-    }
+    const news = await fetchNews();
+    const selected = await selectNews(news);
+    await sendEmail(selected);
 }
 
-main();
+export default {
+    async scheduled() {
+        try {
+            await main();
+            console.log("ニュース配信処理が完了しました");
+        } catch (error) {
+            console.error("ニュース配信処理に失敗しました:", error);
+            throw error;
+        }
+    },
+};
