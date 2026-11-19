@@ -23,7 +23,8 @@
     "devDependencies": {
         "@types/node": "^26.6.6",
         "tsx": "^4.23.15",
-        "typescript": "^7.0.2"
+        "typescript": "^7.0.2",
+        "wrangler": "^4.165.0"
     },
     "dependencies": {
         "@google/genai": "^3.4.0",
