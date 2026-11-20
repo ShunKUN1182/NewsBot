@@ -1,0 +1,27 @@
+name: Daily News Bot
+
+on:
+    workflow_dispatch:
+
+jobs:
+    send-news:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run News Bot
+              run: npm run start
+              env:
+                  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                  RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
