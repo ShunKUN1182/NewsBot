@@ -21,8 +21,8 @@ export async function sendEmail(newsObject: SelectedNewsSet) {
     ];
 
     const { data, error } = await resend.emails.send({
-        from: "News Bot <onboarding@resend.dev>",
-        to: ["2250378@ecc.ac.jp"],
+        from: `${process.env.FROM_EMAIL}`,
+        to: [`${process.env.TO_EMAIL}`],
         subject: `${todayDate}のおすすめニュース`,
         html: `
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f3f4f6;padding:24px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1f2937;">
